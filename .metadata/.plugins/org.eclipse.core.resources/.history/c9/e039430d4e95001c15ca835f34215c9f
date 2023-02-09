@@ -1,0 +1,14 @@
+package com.vti.backend.businesslayer;
+
+import java.sql.SQLException;
+import java.util.List;
+
+import com.vti.entity.Account;
+
+public interface IAccountSevice {
+	public Account isLogin(String email, String password) throws ClassNotFoundException, SQLException;
+
+	public Boolean isManager(Account account);
+
+	public List<Account> getlistuser() throws ClassNotFoundException, SQLException;
+}

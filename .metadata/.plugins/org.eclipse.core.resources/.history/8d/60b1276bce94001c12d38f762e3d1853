@@ -1,0 +1,13 @@
+package com.vti.backend.businesslayer;
+
+import java.sql.SQLException;
+
+import com.vti.entity.Candidate;
+
+public interface ICandidateSevice {
+	public Candidate isLogin(String email, String password) throws ClassNotFoundException, SQLException;
+
+	public Boolean isExperience(Candidate candidate);
+
+	public Boolean createCandidate(Candidate candidate) throws SQLException, ClassNotFoundException;
+}

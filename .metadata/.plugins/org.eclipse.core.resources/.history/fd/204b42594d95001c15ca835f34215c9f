@@ -1,0 +1,21 @@
+package com.vti.backend.businesslayer;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.List;
+
+import com.vti.backend.datalayer.IAccountRepository;
+import com.vti.backend.datalayer.AccountRepository;
+import com.vti.entity.Account;
+import com.vti.entity.User;
+
+public class UserSevice implements IUserSevice {
+	private IAccountRepository userRepository;
+
+	public Account isLogin(String email, String password) throws ClassNotFoundException, SQLException;
+
+	public Boolean isManager(Account account);
+
+	public List<Account> getlistuser() throws ClassNotFoundException, SQLException;
+}

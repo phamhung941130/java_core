@@ -1,0 +1,125 @@
+package com.vti.backend.datalayer;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.vti.entity.Account;
+import com.vti.entity.Account.Role;
+import com.vti.entity.Manager;
+import com.vti.entity.Project;
+import com.vti.entity.Project.TeamSize;
+import com.vti.utils.jdbcUltis;
+
+public class AccountRepository implements IAccountRepository {
+	private jdbcUltis jdbc;
+
+	public AccountRepository() throws FileNotFoundException, IOException {
+		jdbc = new jdbcUltis();
+	}
+
+	@Override
+	public Account isLogin(String email, String password) throws ClassNotFoundException, SQLException {
+		String sql = "SELECT * FROM Account WHERE Email=? AND Password =?;";
+		PreparedStatement pStatement = jdbc.createPrepareStatement(sql);
+		pStatement.setString(1, email);
+		pStatement.setString(2, password);
+		ResultSet resultSet = pStatement.executeQuery();
+		if (resultSet.next()) {
+			Account account = new Account();
+			account.setId(resultSet.getInt(1));
+			account.setFullName(resultSet.getString(2));
+			account.setEmail(resultSet.getString(3));
+			account.setPassword(resultSet.getString(4));
+			Role role = Role.valueOf(resultSet.getString(5).toUpperCase());
+			account.setRole(role);
+			return account;
+
+		} else {
+			return null;
+		}
+
+	}
+
+	@Override
+	public Boolean isManager(Account account) {
+		if (account.getRole() == Role.MANAGER) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	@Override
+	public List<Account> getlistAccount() throws ClassNotFoundException, SQLException {
+		String sql = "SELECT * FROM `User`;";
+		ResultSet resultSet = jdbc.executeQuery(sql);
+		List<Account> list = new ArrayList<Account>();
+		while (resultSet.next()) {
+			Account account = new Account();
+			account.setId(resultSet.getInt(1));
+			account.setFullName(resultSet.getString(2));
+			account.setEmail(resultSet.getString(3));
+			account.setPassword(resultSet.getString(4));
+
+			list.add(account);
+
+		}
+		return list;
+	}
+
+	@Override
+	public Project getProjectById(int id) throws ClassNotFoundException, SQLException {
+		String sql = "SELECT * FROM  Project WHERE ProjectID = ?;";
+		PreparedStatement pStatement = jdbc.createPrepareStatement(sql);
+		pStatement.setInt(1, id);
+		ResultSet resultSet = pStatement.executeQuery();
+		if (resultSet.next()) {
+			Project project = new Project();
+			project.setId(resultSet.getInt(1));
+			project.setName(resultSet.getString(2));
+
+			TeamSize teamSize = TeamSize.valueOf(resultSet.getString(3));
+			project.setTeamSize(teamSize);
+
+			project.setAccountID(resultSet.getInt(4));
+
+			return project;
+
+		} else {
+			return null;
+		}
+
+	}
+
+	@Override
+	public List<Manager> managerOfProject() throws ClassNotFoundException, SQLException {
+		String sql = "SELECT * FROM `Account` a \r\n"
+				+ "JOIN Project p ON a.AccountID = p.AccountID WHERE `Role` = 'MANAGER';";
+		ResultSet resultSet = jdbc.executeQuery(sql);
+		List<Manager> list = new ArrayList<>();
+		while (resultSet.next()) {
+			Manager manager = new Manager();
+			manager.setId(resultSet.getInt(1));
+			manager.setFullName(resultSet.getString(2));
+			manager.setEmail(resultSet.getString(3));
+			manager.setPassword(resultSet.getString(4));
+
+			Role role = Role.valueOf(resultSet.getString(5));
+			manager.setRole(role);
+
+			manager.setProjectName(resultSet.getString(7));
+			manager.setExpInYear(resultSet.getInt(11));
+
+			list.add(manager);
+
+		}
+		return list;
+
+	}
+
+}

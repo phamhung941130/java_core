@@ -1,0 +1,39 @@
+package com.vti.backend.businesslayer;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.List;
+
+import com.vti.backend.datalayer.ICandidateRepository;
+import com.vti.backend.datalayer.CandidateRepository;
+import com.vti.entity.Candidate;
+import com.vti.entity.User;
+
+public class CandidateSevice implements ICandidateSevice {
+	private ICandidateRepository candidateRepository;
+
+	public CandidateSevice() throws FileNotFoundException, IOException {
+		candidateRepository = new CandidateRepository();
+	}
+
+	@Override
+	public Candidate isLogin(String email, String password) throws ClassNotFoundException, SQLException {
+		
+		return candidateRepository.isLogin(email, password);
+	}
+
+	@Override
+	public Boolean isExperience(Candidate candidate) {
+		return candidateRepository.isExperience(candidate);
+	}
+
+	@Override
+	public Boolean createCandidate(Candidate candidate) throws SQLException, ClassNotFoundException {
+		// TODO Auto-generated method stub
+		return candidateRepository.createCandidate(candidate);
+	}
+
+	
+
+}

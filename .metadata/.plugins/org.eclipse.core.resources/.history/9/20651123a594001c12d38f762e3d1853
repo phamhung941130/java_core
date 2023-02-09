@@ -1,0 +1,11 @@
+package com.vti.frontend;
+
+public class Demo {
+	private void man() {
+		Function function = new Function();
+
+		while (true) {
+			function.getLogin();
+		}
+	}
+}

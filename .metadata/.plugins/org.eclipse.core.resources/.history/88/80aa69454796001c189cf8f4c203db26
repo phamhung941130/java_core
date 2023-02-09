@@ -1,0 +1,46 @@
+package com.vti.backend.presentationlayer;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.List;
+
+import com.vti.backend.businesslayer.AccountSevice;
+import com.vti.backend.businesslayer.IAccountSevice;
+import com.vti.entity.Account;
+import com.vti.entity.Manager;
+import com.vti.entity.Project;
+
+public class AccountController {
+	private IAccountSevice accountSevice;
+
+	public AccountController() throws FileNotFoundException, IOException {
+		accountSevice = new AccountSevice();
+
+	}
+
+	public Account isLogin(String email, String password) throws ClassNotFoundException, SQLException {
+		return accountSevice.isLogin(email, password);
+	}
+
+	public Boolean isManager(Account account) {
+		return accountSevice.isManager(account);
+	}
+
+	public List<Account> getlistAccount() throws ClassNotFoundException, SQLException {
+		return accountSevice.getlistAccount();
+	}
+
+	public Project getProjectById(int id) throws ClassNotFoundException, SQLException {
+		return accountSevice.getProjectById(id);
+	}
+
+	public List<Manager> managerOfProject() throws ClassNotFoundException, SQLException {
+		// TODO Auto-generated method stub
+		return accountSevice.managerOfProject();
+	}
+
+	public Boolean isAdmin(Account account) {
+		return accountSevice.isAdmin(account);
+	}
+}

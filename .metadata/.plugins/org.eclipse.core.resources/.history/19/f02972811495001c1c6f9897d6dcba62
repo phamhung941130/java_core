@@ -1,0 +1,16 @@
+package com.vti.backend.datalayer;
+
+import java.sql.SQLException;
+
+import com.vti.entity.Candidate;
+
+public interface ICandidateRepository {
+	public Candidate isLogin(String email, String password) throws ClassNotFoundException, SQLException;
+
+	public Boolean isExperience(Candidate candidate);
+
+	public Boolean createExperience(Candidate candidate) throws SQLException, ClassNotFoundException;
+
+	public Boolean createFresher(Candidate candidate) throws SQLException, ClassNotFoundException;
+
+}

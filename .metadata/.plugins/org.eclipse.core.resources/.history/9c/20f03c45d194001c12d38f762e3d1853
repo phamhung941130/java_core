@@ -1,0 +1,41 @@
+package com.vti.frontend;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.sql.SQLException;
+
+import com.vti.utils.ScannerUltis;
+
+public class Demo {
+	public static void main(String[] args)
+			throws FileNotFoundException, IOException, ClassNotFoundException, SQLException {
+		Function function = new Function();
+		while (true) {
+			String leftAlignFormat = "| %-72s |%n";
+			System.out.format("+--------------------------------------------------------------------------+%n");
+			System.out.format("|                        Choose please                                     |%n");
+			System.out.format("+--------------------------------------------------------------------------+%n");
+			System.out.format(leftAlignFormat, "1. Quản lý nhân viên.");
+			System.out.format(leftAlignFormat, "2. Quản lý phòng ban.");
+			System.out.format(leftAlignFormat, "3. Quản lý vị trí.");
+			System.out.format(leftAlignFormat, "4. Thoát chương trình.");
+			switch (ScannerUltis.inputIntPositive()) {
+			case 1:
+				function.getLogin();
+				break;
+			case 2:
+				function.create_Candidate();
+				break;
+			case 3:
+
+				break;
+			case 4:
+				return;
+			default:
+				System.out.println("Nhập lại:");
+
+				break;
+			}
+		}
+	}
+}

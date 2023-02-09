@@ -1,0 +1,7 @@
+package com.vti.backend.datalayer;
+
+import com.vti.entity.User;
+
+public interface IUserRepository {
+	public User isLogin(String email, String password);
+}

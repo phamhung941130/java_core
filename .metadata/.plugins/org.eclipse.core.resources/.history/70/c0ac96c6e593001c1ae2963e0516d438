@@ -1,0 +1,7 @@
+package com.vti.backend.businesslayer;
+
+import com.vti.entity.User;
+
+public interface IUserSevice {
+	public User isLogin(String email, String password);
+}

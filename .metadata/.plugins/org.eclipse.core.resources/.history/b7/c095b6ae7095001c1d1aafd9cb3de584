@@ -1,0 +1,14 @@
+package com.vti.frontend;
+
+public class Law {
+		public static void main(String [] args){
+		Software Developer Entry Test Page 6 of 11
+		boolean [] law = {false, true, true};
+		Object [] obj1 = new Object[1];
+		String test = “test”;
+		obj1[0] = test;
+		System.out.println(law[3]);
+		}
+		}
+
+

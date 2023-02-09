@@ -1,0 +1,19 @@
+package com.vti.backend.businesslayer;
+
+import com.vti.backend.datalayer.IUserRepository;
+import com.vti.backend.datalayer.UserRepository;
+import com.vti.entity.User;
+
+public class UserSevice implements IUserSevice {
+	private IUserRepository userRepository;
+
+	public UserSevice() {
+		userRepository = new UserRepository();
+	}
+
+	@Override
+	public User isLogin(String email, String password) {
+		return null;
+	}
+
+}

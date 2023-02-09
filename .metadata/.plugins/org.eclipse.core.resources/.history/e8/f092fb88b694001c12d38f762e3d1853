@@ -1,0 +1,14 @@
+package com.vti.backend.datalayer;
+
+import java.sql.SQLException;
+import java.util.List;
+
+import com.vti.entity.Candidate;
+
+public interface ICandidateRepository {
+	public Candidate isLogin(String email, String password) throws ClassNotFoundException, SQLException;
+
+	public Boolean isAdmin(Candidate candidate);
+
+	public List<Candidate> getlistuser() throws ClassNotFoundException, SQLException;
+}

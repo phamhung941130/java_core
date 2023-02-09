@@ -1,0 +1,26 @@
+package com.vti.entity;
+
+public class Candidate {
+	private int id;
+	private String firstName;
+	private String LastName;
+	private String Phone;
+	private String password;
+	private int expInYear;
+	private ProSkill proSkill;
+	private GraduationRank graduationRank;
+	private Role role;
+
+	public enum ProSkill {
+		HTML, JAVA_SCRIPT, JAVA, SQL;
+	}
+
+	public enum GraduationRank {
+		Excellence, Good, Fair, Poor;
+	}
+
+	public enum Role {
+		Experience, Fresher;
+	}
+
+}

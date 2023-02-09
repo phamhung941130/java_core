@@ -1,0 +1,45 @@
+package com.vti.entity;
+
+public class Project {
+	private int id;
+	private String name;
+	private TeamSize teamSize;
+	private int accountID;
+
+	public enum TeamSize {
+		XL, L, M, S
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public TeamSize getTeamSize() {
+		return teamSize;
+	}
+
+	public void setTeamSize(TeamSize teamSize) {
+		this.teamSize = teamSize;
+	}
+
+	public int getAccountID() {
+		return accountID;
+	}
+
+	public void setAccountID(int accountID) {
+		this.accountID = accountID;
+	}
+
+}

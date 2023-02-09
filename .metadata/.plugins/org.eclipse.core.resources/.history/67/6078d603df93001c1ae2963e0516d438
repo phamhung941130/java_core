@@ -1,0 +1,18 @@
+package com.vti.frontend;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
+import com.vti.utils.jdbcUltis;
+
+public class Demo {
+	private jdbcUltis jdbc;
+
+	public Demo() throws FileNotFoundException, IOException {
+		jdbc = new jdbcUltis();
+	}
+
+	public static void main(String[] args) {
+
+	}
+}

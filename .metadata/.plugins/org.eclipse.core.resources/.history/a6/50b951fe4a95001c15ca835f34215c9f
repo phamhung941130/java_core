@@ -1,0 +1,11 @@
+package com.vti.entity;
+
+public class Project {
+	private int id;
+	private String name;
+	private TeamSize teamSize;
+
+	public enum TeamSize {
+		XL, L, M, S
+	}
+}

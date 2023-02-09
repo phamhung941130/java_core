@@ -1,0 +1,7 @@
+package com.vti.entity;
+
+public interface INew {
+	void Display();
+	float Calculate();
+	
+}

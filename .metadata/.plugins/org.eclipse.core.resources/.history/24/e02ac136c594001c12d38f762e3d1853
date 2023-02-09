@@ -1,0 +1,16 @@
+package com.vti.backend.presentationlayer;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
+import com.vti.backend.businesslayer.CandidateSevice;
+import com.vti.backend.businesslayer.ICandidateSevice;
+
+public class CandidateController {
+	private ICandidateSevice candidateSevice;
+
+	public CandidateController() throws FileNotFoundException, IOException {
+		candidateSevice = new CandidateSevice();
+	}
+
+}

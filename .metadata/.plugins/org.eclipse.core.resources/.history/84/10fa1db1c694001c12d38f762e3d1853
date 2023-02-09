@@ -1,0 +1,31 @@
+package com.vti.frontend;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.sql.SQLException;
+
+import com.vti.utils.ScannerUltis;
+
+public class Demo {
+	public static void main(String[] args)
+			throws FileNotFoundException, IOException, ClassNotFoundException, SQLException {
+		Function function = new Function();
+
+		while (true) {
+			int i = ScannerUltis.inputIntPositive();
+			switch (i) {
+			case 1:
+				function.getLogin();
+				break;
+			case 2:
+				function.getLogin();
+				break;
+			case 3:				
+				return;
+			default:
+				break;
+			}
+			function.getLogin();
+		}
+	}
+}

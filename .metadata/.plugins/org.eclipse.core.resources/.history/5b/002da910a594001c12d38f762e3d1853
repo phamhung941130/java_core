@@ -1,0 +1,13 @@
+package com.vti.frontend;
+
+import com.vti.utils.ScannerUltis;
+
+public class Demo {
+	private void man() {
+		Function function = new Function();
+		
+		while (true) {
+			function.getLogin();
+		}		
+}
+}

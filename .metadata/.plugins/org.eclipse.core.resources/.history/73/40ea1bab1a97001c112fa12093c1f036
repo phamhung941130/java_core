@@ -1,0 +1,55 @@
+package com.vti.entity;
+
+public class New implements INew {
+	private int id;
+	private String title;
+	private String PublishDate;
+	private String Author;
+	private String Content;
+	private float AverageRate;
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getPublishDate() {
+		return PublishDate;
+	}
+
+	public void setPublishDate(String publishDate) {
+		PublishDate = publishDate;
+	}
+
+	public String getAuthor() {
+		return Author;
+	}
+
+	public void setAuthor(String author) {
+		Author = author;
+	}
+
+	public String getContent() {
+		return Content;
+	}
+
+	public void setContent(String content) {
+		Content = content;
+	}
+
+	public float getAverageRate() {
+		return AverageRate;
+	}
+
+}

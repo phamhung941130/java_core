@@ -1,0 +1,34 @@
+/*============================== CREATE DATABASE =======================================*/
+DROP DATABASE IF EXISTS Testing_Ontap1;
+CREATE DATABASE Testing_Ontap1;
+USE Testing_Ontap1;
+
+/*============================== CREATE TABLE =======================================*/
+-- create table User: Department  id, FullName, Email, Password
+CREATE TABLE Candidate(
+	Id 		SMALLINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+	FirstName 	VARCHAR(50) UNIQUE KEY,
+    LastName 	VARCHAR(50) UNIQUE KEY,
+    Email 		VARCHAR(50) UNIQUE KEY NOT NULL,
+    Phone 		VARCHAR(10)  NOT NULL,
+    `Password`	VARCHAR(50) NOT NULL,
+    ExpInYear 	SMALLINT			,
+    ProSkill 		ENUM('HTML', 'JAVA_SCRIPT', 'JAVA', 'SQL'),
+    GraduationRank 		ENUM('EXCELLENCE', 'GOOD', 'FAIR', 'POOR'),
+    `Role`		ENUM('EXPERIENCE', 'FRESHER') NOT NULL
+);
+
+/*============================== INSERT DATABASE =======================================*/
+INSERT INTO Candidate  (   FirstName, 	 LastName,			Phone,					Email,			 `Password`,	ExpInYear,	ProSkill	,	GraduationRank,			`Role`	  ) 
+VALUES																								
+					(	'Fullname 1' ,	'LastName1',		'0981234567',		'Email1@gmail.com.vn' ,	 '123456aA'			,1,		'HTML',				null,				'EXPERIENCE' ),
+					(	'Fullname 2' ,  'LastName2',		'0981234569',		'Email2@gmail.com.vn' ,  '123456aA' 		,null,		null,			'Excellence',		'FRESHER'  ),
+                    (	'Fullname 3' ,  'LastName3',		'0981234568',		'Email3@gmail.com.vn' ,  '123456aA' 		,3,		'JAVA',				null,				'EXPERIENCE' ),
+                    (	'Fullname 4' ,  'LastName4',		'0981234566',		'Email4@gmail.com.vn' ,  '123456aA' 		,4,		'JAVA_SCRIPT',		null,				'EXPERIENCE' ),
+                    (	'Fullname 5' ,  'LastName5',		'0981234565',		'Email5@gmail.com.vn' ,  '123456aA' 		,5,		'SQL',				null,				'EXPERIENCE' ),
+					(	'Fullname 6' ,  'LastName6',		'0981234564',		'Email6@gmail.com.vn' ,  '123456aA' 		,null,	null,				'Poor',				'FRESHER'  ),
+					(	'Fullname 7' ,  'LastName7',		'0981234563',		'Email7@gmail.com.vn' ,  '123456aA' 		,null,	null,				'Fair',				'FRESHER'  ),
+                    (	'Fullname 8' ,  'LastName8',		'0981234562',		'Email8@gmail.com.vn' ,  '123456aA' 		,null,	null,				'Good'	,			'FRESHER'  ),
+                    (	'Fullname 9' ,  'LastName9',		'0981234561',		'Email9@gmail.com.vn' ,  '123456aA' 		,null,	null,				'Excellence',		'FRESHER'  ),
+                    (	'Fullname 10',  'LastName10',		'0981234510',		'Email10@gmail.com.vn',  '123456aA' 		,null,	null,				'Excellence',		'FRESHER'  );
+SELECT * FROM Candidate;

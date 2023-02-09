@@ -1,0 +1,135 @@
+package com.vti.backend.datalayer;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.vti.entity.Candidate;
+import com.vti.entity.Candidate.GraduationRank;
+import com.vti.entity.Candidate.ProSkill;
+import com.vti.entity.Candidate.Role;
+import com.vti.utils.jdbcUltis;
+
+public class CandidateRepository implements ICandidateRepository {
+	private jdbcUltis jdbc;
+
+	public CandidateRepository() throws FileNotFoundException, IOException {
+		jdbc = new jdbcUltis();
+	}
+
+	@Override
+	public Candidate isLogin(String email, String password) throws ClassNotFoundException, SQLException {
+		String sql = "SELECT * FROM Candidate WHERE Email=? AND Password =?;";
+		PreparedStatement pStatement = jdbc.createPrepareStatement(sql);
+		pStatement.setString(1, email);
+		pStatement.setString(2, password);
+		ResultSet resultSet = pStatement.executeQuery();
+		if (resultSet.next()) {
+			Candidate candidate = new Candidate();
+			candidate.setId(resultSet.getInt(1));
+			candidate.setFirstName(resultSet.getString(2));
+			candidate.setLastName(resultSet.getString(3));
+			candidate.setEmail(resultSet.getString(4));
+			candidate.setPhone(resultSet.getString(5));
+			candidate.setPassword(resultSet.getString(6));
+			candidate.setExpInYear(resultSet.getInt(7));
+
+			ProSkill proSkill = ProSkill.valueOf(resultSet.getString(8).toUpperCase());
+			candidate.setProSkill(proSkill);
+
+			GraduationRank graduationRank = GraduationRank.valueOf(resultSet.getString(9).toUpperCase());
+			candidate.setGraduationRank(graduationRank);
+
+			Role role = Role.valueOf(resultSet.getString(10));
+			return candidate;
+
+		} else {
+			return null;
+		}
+
+	}
+
+	@Override
+	public Boolean isExperience(Candidate candidate) {
+		if (candidate.getRole() == Role.Experience) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	@Override
+	public List<Candidate> getListCandidate() throws ClassNotFoundException, SQLException {
+		String sqlSeLecAcc = "SELECT * FROM Candidate ORDER BY Id ASC";
+		ResultSet resultSet = jdbc.executeQuery(sqlSeLecAcc);
+		List<Candidate> list = new ArrayList<Candidate>();
+		while (resultSet.next()) {
+			Candidate candidate = new Candidate();
+			candidate.setId(resultSet.getInt(1));
+			candidate.setFirstName(resultSet.getString(2));
+			candidate.setLastName(resultSet.getString(3));
+			candidate.setEmail(resultSet.getString(4));
+			candidate.setPhone(resultSet.getString(5));
+			candidate.setPassword(resultSet.getString(6));
+			candidate.setExpInYear(resultSet.getInt(7));
+			ProSkill proSkill = ProSkill.valueOf(resultSet.getString(8));
+			candidate.setProSkill(proSkill);
+
+			GraduationRank graduationRank = GraduationRank.valueOf(resultSet.getString(9));
+
+			Role role = Role.valueOf(resultSet.getString(10));
+			list.add(candidate);
+		}
+		return list;
+	}
+
+	@Override
+	public Boolean createExperience(Candidate candidateNew) throws SQLException, ClassNotFoundException {
+		String sqlCreate = "INSERT INTO Candidate  (   FirstName, 	 LastName,			Phone,					Email,			 Password,	ExpInYear,	ProSkill	,	GraduationRank,			Role	  ) \r\n"
+				+ "VALUES																								\r\n"
+				+ "									(	? ,				?,				?,							? ,	 				?,			?,		?,				null,		'Experience' );";
+		PreparedStatement preparedStatementInsertCandidate = jdbc.createPrepareStatement(sqlCreate);
+		preparedStatementInsertCandidate.setString(1, candidateNew.getFirstName());
+		preparedStatementInsertCandidate.setString(2, candidateNew.getLastName());
+		preparedStatementInsertCandidate.setString(3, candidateNew.getPhone());
+		preparedStatementInsertCandidate.setString(4, candidateNew.getEmail());
+		preparedStatementInsertCandidate.setString(5, candidateNew.getPassword());
+		preparedStatementInsertCandidate.setInt(6, candidateNew.getExpInYear());
+
+		String proSkill = String.valueOf(candidateNew.getProSkill());
+		preparedStatementInsertCandidate.setString(7, proSkill);
+
+		int result = preparedStatementInsertCandidate.executeUpdate();
+		if (result == 1) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	@Override
+	public Boolean createFresher(Candidate candidateNew) throws SQLException, ClassNotFoundException {
+		String sqlCreate = "INSERT INTO Candidate  (   FirstName, 	 LastName,			Phone,					Email,			 Password,		ExpInYear,	ProSkill	,	GraduationRank,			Role	  ) \r\n"
+				+ "VALUES																								\r\n"
+				+ "									(	? ,				?,				?,							? ,	 				?,			null,		null,				?,		'Fresher' );";
+		PreparedStatement preparedStatementInsertCandidate = jdbc.createPrepareStatement(sqlCreate);
+		preparedStatementInsertCandidate.setString(1, candidateNew.getFirstName());
+		preparedStatementInsertCandidate.setString(2, candidateNew.getLastName());
+		preparedStatementInsertCandidate.setString(3, candidateNew.getEmail());
+		preparedStatementInsertCandidate.setString(4, candidateNew.getPhone());
+		preparedStatementInsertCandidate.setString(5, candidateNew.getPassword());
+		preparedStatementInsertCandidate.setString(6, candidateNew.getGraduationRank().toString());
+
+		int result = preparedStatementInsertCandidate.executeUpdate();
+		if (result == 1) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+}

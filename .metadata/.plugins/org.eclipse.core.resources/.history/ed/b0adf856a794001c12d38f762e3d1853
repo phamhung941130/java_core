@@ -1,0 +1,13 @@
+package com.vti.entity;
+
+public class Candidate {
+	private int id;
+	private String firstName;
+	private String LastName;
+	private String Phone;
+
+	
+	
+	
+	
+}

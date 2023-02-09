@@ -1,0 +1,179 @@
+package com.vti.frontend;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.sql.SQLException;
+
+import com.vti.backend.presentationlayer.CandidateController;
+import com.vti.entity.Candidate;
+import com.vti.utils.ScannerUltis;
+
+public class Function {
+	private CandidateController candidateController;
+
+	public Function() throws FileNotFoundException, IOException {
+		candidateController = new CandidateController();
+	}
+
+	public void getLogin() throws ClassNotFoundException, SQLException {
+		while (true) {
+			System.out.println("Moi ban Login he thong");
+			System.out.println("Moi ban nhap vao Email: ");
+			String emailInput = ScannerUltis.inputEmail();
+
+			System.out.println("Moi ban nhap vao Password: ");
+			String passwordInput = ScannerUltis.inputPassword();
+			Candidate candidate = candidateController.isLogin(emailInput, passwordInput);
+			if (candidate != null) {
+				System.out.println("Login thanh cong!");
+				if (candidateController.isExperience(candidate)) {
+					getMenuExperience();
+				} else {
+					getMenuFresher();
+				}
+			} else {
+				System.out.println("Thong tin ban nhap ko dung!");
+			}
+		}
+	}
+
+	private void getMenuFresher() throws ClassNotFoundException, SQLException {
+		System.out.println("Moi ban chon chuc nang cua Employee");
+		while (true) {
+			System.out.println("------MỜI BẠN CHỌN CHỨC NĂNG------");
+			String leftAlignFormat = "| %-72s |%n";
+			System.out.format("+--------------------------------------------------------------------------+%n");
+			System.out.format("|                        Choose please                                     |%n");
+			System.out.format("+--------------------------------------------------------------------------+%n");
+			System.out.format(leftAlignFormat, "1. Danh sách User trên hệ thống");
+			System.out.format(leftAlignFormat, "2. Tìm User theo ID");
+			System.out.format(leftAlignFormat, "3. Exit");
+			System.out.format("+--------------------------------------------------------------------------+%n");
+			switch (ScannerUltis.inputIntPositive()) {
+			case 1:
+				System.out.println("Danh sách User trên hệ thống");
+				getListCandidate();
+				break;
+			case 2:
+				System.out.println("Tìm User theo ID");
+				getUserById();
+				break;
+			case 3:
+				return;
+			default:
+				System.out.println("Nhập lại:");
+				break;
+			}
+		}
+
+	}
+
+	private void getUserById() {
+		// TODO Auto-generated method stub
+
+	}
+
+	private void getListCandidate() throws ClassNotFoundException, SQLException {
+
+		System.out.format("+----+-------------ListCandidate--------------+-----------------------+%n");
+	}
+
+	private void getMenuExperience() {
+		System.out.println("Moi ban chon chuc nang Admin");
+		while (true) {
+			System.out.println("------MỜI BẠN CHỌN CHỨC NĂNG------");
+			String leftAlignFormat = "| %-72s |%n";
+			System.out.format("+--------------------------------------------------------------------------+%n");
+			System.out.format("|                        Choose please                                     |%n");
+			System.out.format("+--------------------------------------------------------------------------+%n");
+			System.out.format(leftAlignFormat, "1. Tạo Employee mới");
+			System.out.format(leftAlignFormat, "2. Xóa Employee theo Id");
+			System.out.format(leftAlignFormat, "3. Exit");
+			System.out.format("+--------------------------------------------------------------------------+%n");
+			switch (ScannerUltis.inputIntPositive()) {
+			case 1:
+
+				break;
+			case 2:
+
+				break;
+			case 3:
+				return;
+			default:
+				System.out.println("Nhập lại:");
+				break;
+			}
+		}
+
+	}
+
+	public void create_Candidate() throws ClassNotFoundException, SQLException {
+		System.out.println("Chuc nang tao moi Candidate ");
+		Candidate candidateNew = new Candidate();
+		System.out.println("Moi ban nhap Email: ");
+		String emailNew = ScannerUltis.inputEmail();
+		candidateNew.setEmail(emailNew);
+
+		System.out.println("Moi ban nhap FirstName: ");
+		String firstName = ScannerUltis.inputString();
+		candidateNew.setFirstName(firstName);
+
+		System.out.println("Moi ban nhap LastName: ");
+		String lastName = ScannerUltis.inputString();
+		candidateNew.setLastName(lastName);
+
+		System.out.println("Moi ban nhap Phone: ");
+		String Phone = ScannerUltis.inputString();
+		candidateNew.setPhone(Phone);
+
+		System.out.println("Moi ban nhap Password: ");
+		String Password = ScannerUltis.inputString();
+		candidateNew.setPassword(Password);
+
+		System.out.println("Moi ban nhap ExpInYear: ");
+		int ExpInYear = ScannerUltis.inputIntPositive();
+		candidateNew.setExpInYear(ExpInYear);
+
+		System.out.println("Moi ban nhap ProSkill: ");
+		candidateNew.setProSkill(getProSkill());
+
+		Boolean result = candidateController.createExperience(candidateNew);
+		if (result) {
+			System.out.println("Tao moi thanh cong!");
+		} else {
+			System.out.println("Tao moi khong thanh cong!");
+		}
+
+	}
+
+	private String getProSkill() {
+		System.out.println("Moi ban chon ProSkill: 1.HTML, 2.JAVA_SCRIPT, 3.JAVA, 4.SQL ");
+		Candidate candidate = new Candidate();
+		switch (getTrueProSkill()) {
+		case 1:
+			return candidate.getProSkill().HTML.toString();
+
+		case 2:
+			return candidate.getProSkill().JAVA_SCRIPT.toString();
+
+		case 3:
+			return candidate.getProSkill().JAVA.toString();
+
+		case 4:
+			return candidate.getProSkill().SQL.toString();
+		}
+		return null;
+
+	}
+
+	private int getTrueProSkill() {
+		while (true) {
+			int i = ScannerUltis.inputIntPositive();
+			if (i == 1 | i == 2 | i == 3 | i == 4) {
+				return i;
+			} else {
+				System.out.println("ban da nhap sai, vui long nhap lai!");
+			}
+		}
+	}
+}

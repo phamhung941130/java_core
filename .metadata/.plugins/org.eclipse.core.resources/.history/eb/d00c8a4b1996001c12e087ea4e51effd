@@ -1,0 +1,8 @@
+package com.vti.entity;
+
+public class Manager extends Account {
+	private int id;
+	private int expInYear;
+	private String projectName;
+
+}
